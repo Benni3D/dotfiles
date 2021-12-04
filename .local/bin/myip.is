@@ -1,0 +1,4 @@
+#!/bin/sh
+
+printf "IPv4: %s\n" "$(curl -s4 icanhazip.com)"
+printf "IPv6: %s\n" "$(curl -s6 icanhazip.com)"

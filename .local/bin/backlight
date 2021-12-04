@@ -1,0 +1,50 @@
+#!/bin/sh
+
+print_usage() {
+   echo "Usage: $(basename $0) [-h] [-s|-g|-i|-d] brightness"
+}
+print_help() {
+   print_usage
+   echo
+   echo "Usages:"
+   printf "\t$(basename $0) -h\t\t\t- Show this page\n"
+   printf "\t$(basename $0) -g\t\t\t- Read the backlight brightness\n"
+   printf "\t$(basename $0) -s value\t\t- Set the backlight brightness\n"
+   printf "\t$(basename $0) -i value\t\t- Increase the backlight brightness\n"
+   printf "\t$(basename $0) -d value\t\t- Decrease the backlight brightness\n"
+}
+
+dir="$(echo /sys/class/backlight/amdgpu_bl*)"
+file="${dir}/brightness"
+
+[ $# -eq 0 ] && print_usage && exit 1
+args=$(getopt -o 'hs:gi:d:' -- "$@")
+[ -z "$args" ] && print_usage && exit 1
+eval set -- "$args"
+
+setbr() {
+   local br
+   if echo "$1" | grep -q '^[0-9]\+%$'; then
+      local tmp="$(echo "$1" | tr -d '%')"
+      local max="$(cat "${dir}/max_brightness")"
+      br=$(( tmp * 255 / 100 ))
+   else
+      br="$1"
+   fi
+   echo "$br" | sudo tee "$file" >/dev/null
+}
+
+brightness=$(cat "$file")
+
+while true; do
+   case $1 in
+   -h) print_help; shift; exit ;;
+   -g) echo "$brightness"; shift; continue ;;
+   -s) setbr $2; shift 2; continue ;;
+   -i) setbr $((brightness + $2)); shift 2; continue ;;
+   -d) setbr $((brightness - $2)); shift 2; continue ;;   
+   --) shift; break ;;
+   *)  print_help; exit 1 ;;
+   esac
+done
+

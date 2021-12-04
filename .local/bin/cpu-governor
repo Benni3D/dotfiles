@@ -1,0 +1,44 @@
+#!/bin/sh
+
+cpudir="/sys/devices/system/cpu"
+
+set_governor() {
+   local i
+   i=0
+   while [ "$i" -lt "$(nproc)" ]; do
+      echo "$1" > "${cpudir}/cpu${i}/cpufreq/scaling_governor"
+      i=$((i + 1))
+   done
+}
+
+get_governor() {
+   cat "${cpudir}/cpu0/cpufreq/scaling_governor"
+}
+get_available_governors() {
+   cat "${cpudir}/cpu0/cpufreq/scaling_available_governors"
+}
+
+print_usage() {
+   echo "Usage: $(basename "$0") -l|-g|-s governor" >&2
+   exit 1
+}
+
+[ $# -lt 1 ] && print_usage
+
+case "$1" in
+-l)
+   get_available_governors
+   ;;
+-g)
+   get_governor
+   ;;
+-s)
+   [ -z "$2" ] && echo "Usage: $(basename "$0") -s governor" >&2 && exit 1
+   [ "$(id -u)" != 0 ] && echo "Superuser access required." >&2 && exit 1
+   set_governor "$2"
+   ;;
+*)
+   print_usage
+   ;;
+esac
+
