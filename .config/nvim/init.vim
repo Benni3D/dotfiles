@@ -33,6 +33,9 @@ command Writer    set colorcolumn=80 tw=80 wrap spell spelllang=de
 command SpellDE   set spell spelllang=de
 command SpellEN   set spell spelllang=en
 
+let g:tex_indent_brace=0
+let g:tex_indent_items=0
+
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
