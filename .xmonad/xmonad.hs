@@ -114,6 +114,7 @@ myStartupHook = do
     spawnOnce "upower-log.sh &"
     spawnOnce "lxsession &"
     spawnOnce "gnome-keyring-daemon &"
+    spawnOnce "sudo systemctl start systemd-swap.service &"
     -- setWMName "LG3D"
 
 myColorizer :: Window -> Bool -> X (String, String)

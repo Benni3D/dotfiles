@@ -23,12 +23,13 @@ noremap P "+P
 
 map <leader>s :!clear && shellcheck %<CR>
 " map <leader>c :w! \| !autocompiler.sh <c-r>%<CR><CR>
-map <leader>m :!make && sudo make install <CR>
+map <leader>m :!make<CR><CR>
+map <leader>M :!make && sudo make install <CR>
 map <leader>v :w! \| !viewdoc.sh <c-r>%<CR><CR>
 map <silent> <leader><leader> :nohlsearch<CR>
 map <leader>j a<c-r>%<ESC>
 map <leader>n :NERDTreeToggle<CR>
-map <S-c> <plug>NERDCommenterInvert
+map <leader>c <plug>NERDCommenterInvert
 
 filetype plugin on
 
