@@ -103,7 +103,7 @@ myStartupHook = do
     spawnOnce "nm-applet &"
     -- spawnOnce "volumeicon &"
     -- spawnOnce "conky -c $HOME/.config/conky/xmonad/doom-one-01.conkyrc"
-    spawnOnce "conky"
+    spawnOnce "{ killall conky; sleep 1; conky; } &"
     spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x282c34  --height 22 &"
 
     spawnOnce "nitrogen --restore &"   -- if you prefer nitrogen to feh
@@ -370,6 +370,7 @@ myKeys =
          , ("M-e v", spawn "virt-manager")
          , ("M-S-f", spawn "dmenuflatpaks.sh")
          , ("M-c",   spawn "alacritty -e haskalc")
+         , ("M-S-ß", spawn "dmenu-man.sh")
 
          , ("M-S-h", spawn "alacritty -e htop")
          , ("M-S-m", spawn "sudo tuxedo-tsw toggle")

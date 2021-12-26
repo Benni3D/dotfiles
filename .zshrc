@@ -23,6 +23,7 @@ alias man='LC_ALL=POSIX man'
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias e="$EDITOR"
+alias er="$EDITOR -R"
 alias se="sudo $EDITOR"
 alias t='mkdir -p /tmp/benni/test && cd /tmp/benni/test'
 alias untar='tar -xf'
