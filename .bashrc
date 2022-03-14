@@ -27,3 +27,5 @@ shopt -s direxpand
 
 export EIX_LIMIT=0
 
+
+export QSYS_ROOTDIR="/mnt/src/quartus/quartus/sopc_builder/bin"

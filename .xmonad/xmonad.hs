@@ -80,9 +80,12 @@ myBrowser :: String
 myBrowser = "brave "  -- Sets qutebrowser as browser
 
 
+myEmacs :: String
+myEmacs = "emacsclient -c -a 'emacs' "
+
 myEditor :: String
-myEditor = "nvim "  -- Sets emacs as editor
--- myEditor = myTerminal ++ " -e vim "    -- Sets vim as editor
+--myEditor = "nvim "  -- Sets emacs as editor
+myEditor = myEmacs
 
 myBorderWidth :: Dimension
 myBorderWidth = 0           -- Sets border width for windows
@@ -110,11 +113,12 @@ myStartupHook = do
     -- spawnOnce "setxkbmap de &"
     spawnOnce "sudo tuxedo-tsw off &"
     spawnOnce "keylight -c green -b 64 &"
-    -- spawnOnce "imwheel --kill &"
     spawnOnce "upower-log.sh &"
     spawnOnce "lxsession &"
     spawnOnce "gnome-keyring-daemon &"
     spawnOnce "sudo systemctl start systemd-swap.service &"
+    spawnOnce "/usr/bin/emacs --daemon"
+    spawnOnce "mount /mnt/nextcloud &"
     -- setWMName "LG3D"
 
 myColorizer :: Window -> Bool -> X (String, String)
@@ -356,6 +360,9 @@ myKeys =
         , ("M-S-q", spawn "dmenu-restart.sh")              -- Quits xmonad
         , ("M-S-/", spawn "~/.xmonad/xmonad_keys.sh")
 
+        , ("M-S-c", spawn $ "dmenuconfig.sh 'Open Config' ~/.config/dmenuconfig '" ++ myEditor ++ "'")
+        , ("M-S-p", spawn "passmenu --type -p Password -l 20")
+
 
     -- KB_GROUP Run Prompt
         , ("M-S-<Return>", spawn "dmenu_run -i -p \"Run: \"") -- Dmenu
@@ -365,15 +372,21 @@ myKeys =
          , ("M-e t", spawn "tuxedo-control-center")
          , ("M-e n", spawn "flatpak run com.leinardi.gwe")
          , ("M-e c", spawn "alacritty --config-file /home/benni/.config/alacritty/my_alacritty.yml -e cointop")
+         , ("M-e f", spawn "alacritty -e vifm")
          , ("M-e m", spawn "thunderbird")
          , ("M-e s", spawn "signal-desktop")
+         , ("M-e S-s", spawn "prime-run steam")
          , ("M-e v", spawn "virt-manager")
+         , ("M-S-b", spawn "qutebrowser")
          , ("M-S-f", spawn "dmenuflatpaks.sh")
+         , ("M-S-e", spawn myEmacs)
          , ("M-c",   spawn "alacritty -e haskalc")
          , ("M-S-ß", spawn "dmenu-man.sh")
 
          , ("M-S-h", spawn "alacritty -e htop")
          , ("M-S-m", spawn "sudo tuxedo-tsw toggle")
+      
+         , ("M-C-t", spawn $ myEmacs ++ "~/Documents/org/TODO.org")
 
     -- KB_GROUP Other Dmenu Prompts
     -- In Xmonad and many tiling window managers, M-p is the default keybinding to

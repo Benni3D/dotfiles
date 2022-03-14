@@ -67,10 +67,3 @@ let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = '☰'
 let g:airline_symbols.maxlinenr = ''
-
-" call plug#begin(stdpath('data') . '/plugged')
-" 
-" Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
-" Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } 
-" 
-" call plug#end()

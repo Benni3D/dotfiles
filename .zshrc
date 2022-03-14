@@ -16,23 +16,26 @@ bindkey -v
 export EDITOR='nvim'
 export PRINTER='HP_ENVY_4520_series'
 export EIX_LIMIT=0
-export PATH="$HOME/.local/bin:$PATH:/opt/cross/arm/bin:/opt/cross/arm-muslhf/bin"
+export PATH="$HOME/.local/bin:$PATH:/opt/cross/bin:$HOME/.emacs.d/bin"
 export QT_QPA_PLATFORMTHEME=qt5ct
 
 alias man='LC_ALL=POSIX man'
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias e="$EDITOR"
+alias ez="$EDITOR ~/.zshrc"
 alias er="$EDITOR -R"
 alias se="sudo $EDITOR"
-alias t='mkdir -p /tmp/benni/test && cd /tmp/benni/test'
+alias t='mkdir -p /tmp/benni/test && pushd /tmp/benni/test'
 alias untar='tar -xf'
 alias dmesg='sudo dmesg --color=always | less'
 alias config="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
-
+alias tldr="LANG=C tldr"
+alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
 alias ll='ls -lh'
 alias la='ls -A'
 alias lla='ls -lhA'
+alias genpw='openssl rand -base64 32'
 
 unsetopt autocd
 
@@ -70,3 +73,5 @@ bindkey '^[[1;5D' backward-word
 
 #zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 #autoload -Uz compinit && compinit
+
+export QSYS_ROOTDIR="/mnt/src/quartus/quartus/sopc_builder/bin"

@@ -4,4 +4,4 @@
 res=$(sed '/^\s*$/d' "$2" | awk -F',' '{print $1 " | " $2}' | dmenu -p "$1: " -l 20)
 [ -z "$res" ] && exit
 
-$3 "$(echo "${res}" | awk -F'|' '{print $2}' | sed 's/\s//')"
+$3 "$(echo "${res}" | sed "s#~#$PWD#g" | awk -F'|' '{print $2}' | sed 's/\s//')"
