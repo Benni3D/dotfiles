@@ -77,7 +77,7 @@ myTerminal :: String
 myTerminal = "alacritty"    -- Sets default terminal
 
 myBrowser :: String
-myBrowser = "brave "  -- Sets qutebrowser as browser
+myBrowser = "brave --enable-features=VaapiVideoDecoder "  -- Sets qutebrowser as browser
 
 
 myEmacs :: String
